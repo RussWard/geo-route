@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CoordinateInput from './components/CoordinateInput';
+import { calculateDistanceAndBearing } from './algorithm';
+import { Container, Button, Result } from './styles';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [originLatitude, setOriginLatitude] = useState('');
+    const [originLongitude, setOriginLongitude] = useState('');
+    const [destinationLatitude, setDestinationLatitude] = useState('');
+    const [destinationLongitude, setDestinationLongitude] = useState('');
+    const [result, setResult] = useState(null);
+
+    const handleSubmit = () => {
+        const calculation = calculateDistanceAndBearing(
+            parseFloat(originLatitude),
+            parseFloat(originLongitude),
+            parseFloat(destinationLatitude),
+            parseFloat(destinationLongitude)
+        );
+        setResult(calculation);
+    };
+
+    return (
+        <Container>
+            <h1>Geolocation Route App</h1>
+            <CoordinateInput
+                label="Origin Latitude (DMS format)"
+                value={originLatitude}
+                onChange={(e) => setOriginLatitude(e.target.value)}
+            />
+            <CoordinateInput
+                label="Origin Longitude (DMS format)"
+                value={originLongitude}
+                onChange={(e) => setOriginLongitude(e.target.value)}
+            />
+            <CoordinateInput
+                label="Destination Latitude (DMS format)"
+                value={destinationLatitude}
+                onChange={(e) => setDestinationLatitude(e.target.value)}
+            />
+            <CoordinateInput
+                label="Destination Longitude (DMS format)"
+                value={destinationLongitude}
+                onChange={(e) => setDestinationLongitude(e.target.value)}
+            />
+            <Button onClick={handleSubmit}>Submit</Button>
+            
+            {result && (
+                <Result>
+                    <h3>Results:</h3>
+                    <p>Arc Length: {result.arcLength} km</p>
+                    <p>Compass Heading: {result.compassHeading}°</p>
+                </Result>
+            )}
+        </Container>
+    );
 }
 
 export default App;
+
+
