@@ -41,7 +41,7 @@ export function calculateDistanceAndBearing(originLatitude, originLongitude, des
     
     //Find the initial compass heading
     let compassHeading = Math.asin((Math.cos(φ2) * Math.sin(Δλ)) / Math.sin(angle));
-    console.log(angle, Δλ, dotProduct)
+  
     // Formula for initial compass heading (bearing)
     /*const y = Math.sin(Δλ) * Math.cos(φ2);
     const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);

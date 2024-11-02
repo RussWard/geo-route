@@ -24,22 +24,22 @@ function App() {
         <Container>
             <h1>Geolocation Route App</h1>
             <CoordinateInput
-                label="Origin Latitude (DMS format)"
+                label="Origin Latitude (Decimal format)"
                 value={originLatitude}
                 onChange={(e) => setOriginLatitude(e.target.value)}
             />
             <CoordinateInput
-                label="Origin Longitude (DMS format)"
+                label="Origin Longitude (Decimal format)"
                 value={originLongitude}
                 onChange={(e) => setOriginLongitude(e.target.value)}
             />
             <CoordinateInput
-                label="Destination Latitude (DMS format)"
+                label="Destination Latitude (Decimal format)"
                 value={destinationLatitude}
                 onChange={(e) => setDestinationLatitude(e.target.value)}
             />
             <CoordinateInput
-                label="Destination Longitude (DMS format)"
+                label="Destination Longitude (Decimal format)"
                 value={destinationLongitude}
                 onChange={(e) => setDestinationLongitude(e.target.value)}
             />
