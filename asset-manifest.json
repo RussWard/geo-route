@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/goe-route/static/js/main.f0c1d58a.js",
-    "index.html": "/goe-route/index.html",
-    "main.f0c1d58a.js.map": "/goe-route/static/js/main.f0c1d58a.js.map"
+    "main.js": "/geo-route/static/js/main.a2d83ccc.js",
+    "index.html": "/geo-route/index.html",
+    "main.a2d83ccc.js.map": "/geo-route/static/js/main.a2d83ccc.js.map"
   },
   "entrypoints": [
-    "static/js/main.f0c1d58a.js"
+    "static/js/main.a2d83ccc.js"
   ]
 }
