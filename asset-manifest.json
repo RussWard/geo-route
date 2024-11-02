@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/geo-route/static/js/main.5cad4fa7.js",
+    "main.js": "/geo-route/static/js/main.c48eae3e.js",
     "index.html": "/geo-route/index.html",
-    "main.5cad4fa7.js.map": "/geo-route/static/js/main.5cad4fa7.js.map"
+    "main.c48eae3e.js.map": "/geo-route/static/js/main.c48eae3e.js.map"
   },
   "entrypoints": [
-    "static/js/main.5cad4fa7.js"
+    "static/js/main.c48eae3e.js"
   ]
 }
