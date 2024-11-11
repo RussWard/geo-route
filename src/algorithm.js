@@ -17,6 +17,7 @@ export function calculateDistanceAndBearing(originLatitude, originLongitude, des
     //const Δφ = φ2 - φ1;
     const Δλ = Math.abs(λ2 - λ1);
 
+
     //find the sine of the angle between the destination and the north pole
 
     let destinationToPole = Math.PI/2 - φ2;
@@ -73,8 +74,8 @@ export function calculateDistanceAndBearing(originLatitude, originLongitude, des
       compassHeading = Math.asin((Math.sin(destinationToPole) * Math.sin(Δλ)) / Math.sin(angle));
     };
 
-    
-  console.log(compassHeading)
+    if (λ1 > λ2) {compassHeading = 2 * Math.PI - compassHeading};
+
     // Formula for initial compass heading (bearing)
     /*const y = Math.sin(Δλ) * Math.cos(φ2);
     const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
