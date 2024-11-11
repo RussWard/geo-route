@@ -14,22 +14,46 @@ export function calculateDistanceAndBearing(originLatitude, originLongitude, des
 
 
     // Calculate the change in coordinates
-    const Δφ = φ2 - φ1;
-    const Δλ = λ2 - λ1;
+    //const Δφ = φ2 - φ1;
+    const Δλ = Math.abs(λ2 - λ1);
 
+    //find the sine of the angle between the destination and the north pole
+
+    let destinationToPole = Math.PI/2 - φ2;
+
+    //calculate the vector from one point to another
+    function vectorBetweenVectors(headVector, tailVector) {
+      return {
+        x: headVector.x - tailVector.x,
+        y: headVector.y - tailVector.y,
+        z: headVector.z - tailVector.z
+      }
+    };
+  
     // Find the dot product of the two vectors and the angle between
+    function dotProduct(vectorA, vectorB) {
+      return vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z;
+    }
+
     const vector1 = {
       x: Math.cos(λ1) * Math.cos(φ1),
       y: Math.sin(λ1) * Math.cos(φ1),
       z: Math.sin(φ1)
     };
+
     const vector2 = {
       x: Math.cos(λ2) * Math.cos(φ2),
       y: Math.sin(λ2) * Math.cos(φ2),
       z: Math.sin(φ2)
     };
-    let dotProduct = vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
-    let angle = Math.acos(dotProduct);
+
+    const vectorNorth = {
+      x: 0,
+      y: 0,
+      z: 1
+    };
+   
+    let angle = Math.acos(dotProduct(vector1,vector2));
     let arcLength = (EARTH_RADIUS_KM * angle); //Distance in kilometers
 
     // Haversine formula for arc length (distance) between two points on a sphere
@@ -39,9 +63,18 @@ export function calculateDistanceAndBearing(originLatitude, originLongitude, des
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const arcLength = EARTH_RADIUS_KM * c; // Distance in kilometers*/
     
-    //Find the initial compass heading
-    let compassHeading = Math.asin((Math.cos(φ2) * Math.sin(Δλ)) / Math.sin(angle));
-  
+    //Find the initial compass heading in radians from north
+
+    let compassHeading;
+    
+    if (Math.acos(dotProduct(vectorBetweenVectors(vector1,vector2),vectorBetweenVectors(vector1,vectorNorth))) > Math.PI/2) {
+      compassHeading = Math.PI - Math.asin((Math.sin(destinationToPole) * Math.sin(Δλ)) / Math.sin(angle));
+    } else {
+      compassHeading = Math.asin((Math.sin(destinationToPole) * Math.sin(Δλ)) / Math.sin(angle));
+    };
+
+    
+  console.log(compassHeading)
     // Formula for initial compass heading (bearing)
     /*const y = Math.sin(Δλ) * Math.cos(φ2);
     const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
